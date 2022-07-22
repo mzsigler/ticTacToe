@@ -27,13 +27,15 @@ header {
     grid-template-columns: 1fr;
 }
 
-.score {
+.controls {
     display: flex;
     justify-content: center;
     align-items: center;
     border-bottom: 1px solid black;
     height: 5rem;
+    gap: 1rem;
 }
+
 
 .gameBoard {
     width: 100%;
