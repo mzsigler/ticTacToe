@@ -1,94 +1,75 @@
-const boxes = document.querySelectorAll('.box');
-const boxArray = [
-    {
-        id: 1,
-        text: ""
-    },
+console.log("You are in the right file");
+const wrapper = document.querySelector('.wrapper');
+const boxesArray = ["", "", "", "", "", "", "", "", "", ]
 
-    {
-        id: 2,
-        text: ""
-    },
 
-    {
-        id: 3,
-        text: ""
-    },
+const Player = (name, symbol) => {
+    const markerArray = []
+    const marker = symbol;
+    const handle = name;
+    const handleClick = e => {
+        const target = parseInt(e.target.id);
+        const div = document.getElementById(`${target}`);
+        div.innerText = `${marker}`;
+        markerArray.push(target);
 
-    {
-        id: 4,
-        text: ""
-    },
-
-    {
-        id: 5,
-        text: ""
-    },
-
-    {
-        id: 6,
-        text: ""
-    },
-
-    {
-        id: 7,
-        text: ""
-    },
-
-    {
-        id: 8,
-        text: ""
-    },
-
-    {
-        id: 9,
-        text: ""
-    },
-
-];
-const makeBoxesButton = document.getElementById('makeBoxes');
-const gameBoard = document.querySelector('.gameBoard');
-
-const playerFactory = (name, symbol) => {
-    return {
-        name,
-        symbol,
     }
+    return {
+        marker,
+        handle,
+        markerArray,
+        handleClick,
+    };
 }
 
-//iife to load the game board
+const gameBoard = () => {
+    const drawBoard = () => {
+        boxesArray.forEach((box, index) => {
+           const newBox = document.createElement('div');
+           newBox.classList.add('box');
+           newBox.setAttribute("id", index);
+           wrapper.appendChild(newBox);
 
-(() => {
-    boxArray.forEach((box) => {
-        const gameboard = document.querySelector('.gameBoard');
-        const newBox = document.createElement('div');
-        newBox.classList.add('box');
-        newBox.setAttribute('id', `${box.id}`)
-        newBox.innerText = `${box.text}`
-        gameboard.appendChild(newBox);
-    })
-})();
+        })
+    }
+
+    return {drawBoard}
+}
+
+function playGame(gameBoard, player1, player2) {
+    let activePlayer;
+    let winner;
+    gameBoard.drawBoard();
+    
+    pickPlayer = () => {
+        return Math.floor(Math.random() * 2)
+    }
+
+    console.log(pickPlayer())
+
+    if (pickPlayer === 0) {
+        activePlayer = player1
+    } else {
+        activePlayer = player2
+    }
 
 
-gameBoard.addEventListener('click', (e) => {
-    const index = parseInt(e.target.id);
-    console.log(index);
-    selectedBoxRef = boxArray.find(box => {
-        return box.id === index;
-    })
-    selectedBoxRef.text = "X";
-    updateBoxes();
-});
+    playRound = (activePlayer) => {
+        const APdisplay = document.querySelector('.activePlayer');
+        APdisplay.innerText = `Active Player: ${activePlayer.handle}`
+        wrapper.addEventListener('click', activePlayer.handleClick);
 
-function updateBoxes(){
-    const gameboard = document.querySelector('.gameBoard');
-    gameboard.innerHTML = '';
-    boxArray.forEach(box => {
-    const newBox = document.createElement('div');
-    newBox.classList.add('box');
-    newBox.setAttribute('id', `${box.id}`)
-    newBox.innerText = `${box.text}`;
-    gameboard.appendChild(newBox);
-    })
-};
+    }
 
+
+
+
+
+}
+
+const player1 = Player("Player One", "X");
+const player2 = Player("Player Two", "O");
+
+
+const board = gameBoard();
+playGame(board, player1, player2)
