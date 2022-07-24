@@ -5,9 +5,14 @@ const clearButton = document.querySelector('.clearBoard');
 
 
 
+//player object creator
+
 const Player = (name, symbol) => {
     const marker = symbol;
     const handle = name;
+
+    //this basically determines who's marker gets put on the board and in the array
+    //based on activePlayer
 
     const handleClick = e => {
         const target = parseInt(e.target.id);
@@ -21,6 +26,8 @@ const Player = (name, symbol) => {
         }
         
     }
+
+    // check for winning combinations in the array
 
     const checkForWin = () => {
         if(marker === boxesArray[0] 
@@ -56,6 +63,8 @@ const Player = (name, symbol) => {
     };
 
 
+    //instantiate the active property so I can flip it after each round to rotate activePlayer 
+
     let active;
 
     return {
@@ -66,6 +75,8 @@ const Player = (name, symbol) => {
         active,
     };
 }
+
+// gameboard object and associated methods
 
 const gameBoard = () => {
     const drawBoard = () => {
@@ -94,6 +105,8 @@ const gameBoard = () => {
 
     return {drawBoard, clearBoard}
 }
+
+// gameplay object
 
 function playGame(gameBoard, X, O) {
     let winner;
@@ -137,8 +150,16 @@ function playGame(gameBoard, X, O) {
 
 }
 
+// instantiate the players, and the board, and start the game. 
+
 const X = Player("X", "X");
 const O = Player("O", "O");
 const board = gameBoard();
 playGame(board, X, O);
+// this button resets the game. 
+
 clearButton.addEventListener('click', board.clearBoard);
+
+// TODO - declare a tie and clear the board
+
+// TODO - make my own modals instead of using alert
