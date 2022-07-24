@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Rock+Salt&display=swap');
+
+body {
+    background: black;
+    font-family: 'Rock Salt', cursive;
+    color: white;
+}
+
+.game {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 90vw;
+    justify-items: center;
+    margin: auto;
+}
+
 .wrapper {
     min-height: 600px;
     width: 900px;
@@ -6,15 +22,45 @@
     border: 1px solid black;
 }
 
+.controls {
+    width: 100%;
+    display: flex;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-bottom: 16px;
+}
+
+.activePlayer {
+    font-size: 16pt;
+}
+
+.clearBoard {
+    padding: 5px;
+    margin-left: auto;
+    border-radius: 10px;
+    border: 1px solid red;
+    background: black;
+    color: red;
+}
+
 
 .box {
     height: 200px;
-    color: white;
-    background: red;
+    color: red;
+    background: yellow;
     display: grid;
     grid-template-columns: 1fr;
     place-items: center center;
     font-size: 70px;
     font-weight: bold;
-    border: 1px solid black;
+    border: 1px solid green;
+}
+
+.unavailable {
+    border: 1px solid red;
+}
+
+.credits {
+    padding-top: 8px;
+    font-family: 'Roboto', sans-serif;
 }

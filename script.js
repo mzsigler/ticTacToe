@@ -1,26 +1,69 @@
 console.log("You are in the right file");
 const wrapper = document.querySelector('.wrapper');
-const boxesArray = ["", "", "", "", "", "", "", "", "", ]
+let boxesArray = ["", "", "", "", "", "", "", "", "", ];
+const clearButton = document.querySelector('.clearBoard');
+
 
 
 const Player = (name, symbol) => {
-    const markerArray = []
     const marker = symbol;
     const handle = name;
+
     const handleClick = e => {
         const target = parseInt(e.target.id);
         const div = document.getElementById(`${target}`);
-        div.classList.toggle('unavailable');
-        div.setAttribute('owner', marker)
-        div.innerText = `${target}`;
-        boxesArray[target] = marker;
-
+        if(!div.classList.contains('unavailable')) {
+            div.classList.toggle('unavailable');
+            div.innerText = `${marker}`;
+            boxesArray[target] = marker;
+        } else {
+            alert("That space is already taken! Stop that!")
+        }
+        
     }
+
+    const checkForWin = () => {
+        if(marker === boxesArray[0] 
+            && marker === boxesArray[1] 
+            && marker === boxesArray[2]
+            || marker === boxesArray[3]
+            && marker === boxesArray[4]
+            && marker === boxesArray[5]
+            || marker === boxesArray[6]
+            && marker === boxesArray[7]
+            && marker === boxesArray[8]
+            || marker === boxesArray[0]
+            && marker === boxesArray[3]
+            && marker === boxesArray[6]
+            || marker === boxesArray[1]
+            && marker === boxesArray[4]
+            && marker === boxesArray[7]
+            || marker === boxesArray[2]
+            && marker === boxesArray[5]
+            && marker === boxesArray[8]
+            || marker === boxesArray[0]
+            && marker === boxesArray[4]
+            && marker === boxesArray[8]
+            || marker === boxesArray[2]
+            && marker === boxesArray[4]
+            && marker === boxesArray[6]
+            ) {
+                winner = handle;
+                alert(`${winner} wins!`);
+                board.clearBoard();
+
+        };
+    };
+
+
+    let active;
+
     return {
         marker,
         handle,
-        markerArray,
         handleClick,
+        checkForWin,
+        active,
     };
 }
 
@@ -35,72 +78,67 @@ const gameBoard = () => {
         })
     }
 
-    return {drawBoard}
-}
-
-function playGame(gameBoard, player1, player2) {
-    let activePlayer;
-    let winner;
-    gameBoard.drawBoard();
-    
-    pickPlayer = () => {
-        return Math.floor(Math.random() * 2)
-    }
-
-    if (pickPlayer === 0) {
-        activePlayer = player1
-    } else {
-        activePlayer = player2
-    }
-
-
-    playRound = (activePlayer) => {
-        const APdisplay = document.querySelector('.activePlayer');
-        APdisplay.innerText = `Active Player: ${activePlayer.handle}`
-        wrapper.addEventListener('click', ( (e) => {
-            activePlayer.handleClick(e);
-            checkForWin(activePlayer);
-        }));
-    }
-
-    checkForWin = (activePlayer) => {
-        if(activePlayer.marker === boxesArray[0] 
-            && activePlayer.marker === boxesArray[1] 
-            && activePlayer.marker === boxesArray[2]
-            || activePlayer.marker === boxesArray[3]
-            && activePlayer.marker === boxesArray[4]
-            && activePlayer.marker === boxesArray[5]
-            || activePlayer.marker === boxesArray[6]
-            && activePlayer.marker === boxesArray[7]
-            && activePlayer.marker === boxesArray[8]
-            || activePlayer.marker === boxesArray[0]
-            && activePlayer.marker === boxesArray[3]
-            && activePlayer.marker === boxesArray[6]
-            || activePlayer.marker === boxesArray[1]
-            && activePlayer.marker === boxesArray[4]
-            && activePlayer.marker === boxesArray[7]
-            || activePlayer.marker === boxesArray[2]
-            && activePlayer.marker === boxesArray[5]
-            && activePlayer.marker === boxesArray[8]
-            || activePlayer.marker === boxesArray[0]
-            && activePlayer.marker === boxesArray[4]
-            && activePlayer.marker === boxesArray[8]
-            || activePlayer.marker === boxesArray[2]
-            && activePlayer.marker === boxesArray[4]
-            && activePlayer.marker === boxesArray[6]
-            ) {
-            console.log("You won!")
-        } else {
-            console.log(boxesArray)
+    const clearBoard = () => {
+        for(i = 0; i < boxesArray.length; i++){
+            boxesArray[i] = ""
         }
-    };
 
-    playRound(activePlayer);
+        const boxes = document.querySelectorAll('.box');
+        boxes.forEach(box => {
+            box.innerText = "";
+            box.classList.remove('unavailable')
+        })
+
+    }
+
+
+    return {drawBoard, clearBoard}
+}
+
+function playGame(gameBoard, X, O) {
+    let winner;
+    let activePlayer = O;
+    gameBoard.drawBoard();
+
+    
+    const playRound = (activePlayer) => {
+
+        const handleEvents = (e) => {
+            activePlayer.handleClick(e);
+            activePlayer.checkForWin();
+        }
+
+        const APdisplay = document.querySelector('.activePlayer');
+        APdisplay.innerText = `Active Player: ${activePlayer.handle}`;
+        wrapper.addEventListener('click', function myFunction(e) {
+            handleEvents(e);
+            wrapper.removeEventListener('click', myFunction);
+            if(!winner){
+                if(X.active === true){
+                    X.active = false
+                    O.active = true
+                    playRound(O)
+                } else {
+                    O.active = false
+                    X.active = true
+                    playRound(X)
+                }
+            } else {
+                board.clearBoard();
+            }
+        });
+    }
+
+
+    if(!winner){
+        playRound(activePlayer)
+    }
 
 
 }
 
-const player1 = Player("Player One", "X");
-const player2 = Player("Player Two", "O");
+const X = Player("X", "X");
+const O = Player("O", "O");
 const board = gameBoard();
-playGame(board, player1, player2)
+playGame(board, X, O);
+clearButton.addEventListener('click', board.clearBoard);
