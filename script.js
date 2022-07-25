@@ -2,6 +2,7 @@ console.log("You are in the right file");
 const wrapper = document.querySelector('.wrapper');
 let boxesArray = ["", "", "", "", "", "", "", "", "", ];
 const clearButton = document.querySelector('.clearBoard');
+let winner;
 
 
 
@@ -60,6 +61,13 @@ const Player = (name, symbol) => {
                 board.clearBoard();
 
         };
+
+        const boxes = boxesArray.includes("")
+        
+        if(!boxes && !winner){
+            alert("Tie!")
+            board.clearBoard();
+        }
     };
 
 
@@ -109,7 +117,6 @@ const gameBoard = () => {
 // gameplay object
 
 function playGame(gameBoard, X, O) {
-    let winner;
     let activePlayer = O;
     gameBoard.drawBoard();
 
