@@ -12,6 +12,11 @@ body {
     width: 90vw;
     justify-items: center;
     margin: auto;
+    position: relative;
+}
+
+.title {
+    font-size: 25px;
 }
 
 .wrapper {
@@ -40,7 +45,7 @@ body {
     border-radius: 10px;
     border: 1px solid red;
     background: black;
-    color: red;
+    color: yellow;
 }
 
 
@@ -54,10 +59,36 @@ body {
     font-size: 70px;
     font-weight: bold;
     border: 1px solid green;
+    border-radius: 5px;
 }
 
 .unavailable {
     border: 1px solid red;
+}
+
+.modal-container {
+    height: 70vh;
+    width: 75vw;
+    background: darkslategrey;
+    position: absolute;
+    top: 15%;
+    left: 13%;
+    opacity: 90%;
+    margin: auto;
+}
+
+.modal-message {
+    background: black;
+    height: 200px;
+    width: 400px;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    opacity: 100%;
+}
+
+.hidden {
+    display: none
 }
 
 .credits {

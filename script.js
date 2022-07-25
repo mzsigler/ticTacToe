@@ -63,7 +63,7 @@ const Player = (name, symbol) => {
         };
 
         // if the array has no empty spots and there is still no winner, declare a tie. 
-        
+
         const boxes = boxesArray.includes("")
         
         if(!boxes && !winner){
@@ -168,7 +168,5 @@ playGame(board, X, O);
 // this button resets the game. 
 
 clearButton.addEventListener('click', board.clearBoard);
-
-// TODO - declare a tie and clear the board
 
 // TODO - make my own modals instead of using alert
