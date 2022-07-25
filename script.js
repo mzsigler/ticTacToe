@@ -62,6 +62,8 @@ const Player = (name, symbol) => {
 
         };
 
+        // if the array has no empty spots and there is still no winner, declare a tie. 
+        
         const boxes = boxesArray.includes("")
         
         if(!boxes && !winner){
