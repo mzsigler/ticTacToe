@@ -26,7 +26,8 @@ const Player = (name, symbol) => {
             div.innerText = `${marker}`;
             boxesArray[target] = marker;
         } else {
-            alert("That space is already taken! Stop that!")
+            modalContainer.classList.toggle('hidden');
+            modalText.innerText = `That space is already taken! Stop that!`;
         }
         
     }

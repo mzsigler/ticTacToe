@@ -80,7 +80,7 @@ body {
 .modal-message {
     background: red;
     color: yellow;
-    height: 200px;
+    min-height: 200px;
     width: 400px;
     position: absolute;
     top: 30%;
