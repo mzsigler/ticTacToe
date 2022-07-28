@@ -67,24 +67,33 @@ body {
 }
 
 .modal-container {
-    height: 70vh;
-    width: 75vw;
-    background: darkslategrey;
+    height: 95vh;
+    width: 95vw;
+    background: black;
     position: absolute;
-    top: 15%;
-    left: 13%;
-    opacity: 90%;
+    top: 5%;
+    left: 3%;
+    opacity: 100%;
     margin: auto;
 }
 
 .modal-message {
-    background: black;
+    background: red;
+    color: yellow;
     height: 200px;
     width: 400px;
     position: absolute;
     top: 30%;
     left: 30%;
     opacity: 100%;
+    padding: 10px;
+    border: 2px solid yellow;
+    border-radius: 10px;
+}
+
+.modalText {
+    font-size: 40px;
+    text-align: center;
 }
 
 .hidden {

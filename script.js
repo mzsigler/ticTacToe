@@ -2,6 +2,9 @@ console.log("You are in the right file");
 const wrapper = document.querySelector('.wrapper');
 let boxesArray = ["", "", "", "", "", "", "", "", "", ];
 const clearButton = document.querySelector('.clearBoard');
+const closeModalButton = document.querySelector('.close-modal');
+const modalContainer = document.querySelector('.modal-container');
+const modalText = document.querySelector('.modalText');
 let winner;
 
 
@@ -57,7 +60,10 @@ const Player = (name, symbol) => {
             && marker === boxesArray[6]
             ) {
                 winner = handle;
-                alert(`${winner} wins!`);
+                modalContainer.classList.toggle('hidden');
+                modalText.innerText = `${winner} wins!`;
+        
+
                 board.clearBoard();
 
         };
@@ -171,5 +177,7 @@ playGame(board, X, O);
 // this button resets the game. 
 
 clearButton.addEventListener('click', board.clearBoard);
-
+closeModalButton.addEventListener('click', ( () => {
+    modalContainer.classList.toggle('hidden')
+}));
 // TODO - make my own modals instead of using alert
