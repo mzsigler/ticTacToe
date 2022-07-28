@@ -73,7 +73,8 @@ const Player = (name, symbol) => {
         const boxes = boxesArray.includes("")
         
         if(!boxes && !winner){
-            alert("Tie!")
+            modalContainer.classList.toggle('hidden');
+            modalText.innerText = `Tie!`;
             board.clearBoard();
         }
     };
