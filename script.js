@@ -1,4 +1,3 @@
-console.log("You are in the right file");
 const wrapper = document.querySelector('.wrapper');
 let boxesArray = ["", "", "", "", "", "", "", "", "", ];
 const clearButton = document.querySelector('.clearBoard');
@@ -27,7 +26,7 @@ const Player = (name, symbol) => {
             boxesArray[target] = marker;
         } else {
             modalContainer.classList.toggle('hidden');
-            modalText.innerText = `That space is already taken! Stop that!`;
+            modalText.innerText = `That space is already taken ! Stop that !`;
         }
         
     }
@@ -182,4 +181,3 @@ clearButton.addEventListener('click', board.clearBoard);
 closeModalButton.addEventListener('click', ( () => {
     modalContainer.classList.toggle('hidden')
 }));
-// TODO - make my own modals instead of using alert
