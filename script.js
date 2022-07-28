@@ -110,6 +110,7 @@ const gameBoard = () => {
             box.classList.remove('unavailable')
         })
 
+        winner = '';
     }
 
 
@@ -145,16 +146,18 @@ function playGame(gameBoard, X, O) {
                     X.active = true
                     playRound(X)
                 }
+            } else if (winner === X){
+                board.clearBoard();
+                playGame(board, X, O);
             } else {
                 board.clearBoard();
+                playGame(board, X, O);
             }
         });
     }
 
+    playRound(activePlayer)
 
-    if(!winner){
-        playRound(activePlayer)
-    }
 
 
 }
