@@ -4,6 +4,7 @@ const clearButton = document.querySelector('.clearBoard');
 const closeModalButton = document.querySelector('.close-modal');
 const modalContainer = document.querySelector('.modal-container');
 const modalText = document.querySelector('.modalText');
+const body = document.querySelector('body');
 let winner;
 
 
@@ -178,6 +179,11 @@ playGame(board, X, O);
 // this button resets the game. 
 
 clearButton.addEventListener('click', board.clearBoard);
+body.addEventListener('keyup', (e) => {
+    if(e.key === "Escape" && !modalContainer.classList.contains('hidden')){
+        modalContainer.classList.toggle('hidden');
+    }
+})
 closeModalButton.addEventListener('click', ( () => {
     modalContainer.classList.toggle('hidden')
 }));
